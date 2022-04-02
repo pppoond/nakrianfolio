@@ -1,0 +1,25 @@
+<%- include('../layouts/header.ejs') %>
+    <%- include('../includes/navbar.ejs') %>
+        <div style="height: 55px;"></div>
+        <div class="container bg-dark">
+            <div class="row">
+                <div class="col-12 col-xl-8">
+                    <div>
+                        <h1 class="kanit text-light">ยอดนิยม!</h1>
+                    </div>
+                    <div class="row p-1">
+                        <% for (let index=0; index < 10; index++) { %>
+                            <div class="col-4 col-xl-3 p-1">
+                                <img class="rounded item-hover"
+                                    src="https://i.pinimg.com/564x/b0/42/69/b042691f31cb6e56c8e73662a83490d6.jpg"
+                                    alt="https://i.pinimg.com/564x/b0/42/69/b042691f31cb6e56c8e73662a83490d6.jpg"
+                                    width="100%">
+                            </div>
+                            <% } %>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-4"></div>
+            </div>
+        </div>
+        <%- include('../includes/footer.ejs') %>
+        <%- include('../layouts/footer.ejs') %>
