@@ -6,4 +6,12 @@ var config = {
         database: 'heroku_beb18c1c3c87e5c'
     }
 }
+// var config = {
+//     database: {
+//         host: 'localhost',
+//         user: 'root',
+//         password: '',
+//         database: 'nakrianfolio'
+//     }
+// }
 module.exports = config;
