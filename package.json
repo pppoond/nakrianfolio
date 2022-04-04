@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.26.1",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "dateformat": "^3.0.3",

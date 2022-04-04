@@ -1,25 +1,79 @@
 <%- include('../layouts/header.ejs') %>
     <%- include('../includes/navbar.ejs') %>
         <div style="height: 55px;"></div>
-        <div class="container bg-dark">
+        <%- include('../includes/header.ejs') %>
+        <div class="container bg-footer pt-2">
             <div class="row">
                 <div class="col-12 col-xl-8">
                     <div>
-                        <h1 class="kanit text-light">ยอดนิยม!</h1>
+                        <h3 class="kanit text-light">แฟ้มสะสมผลงาน</h3>
                     </div>
-                    <div class="row p-1">
-                        <% for (let index=0; index < 10; index++) { %>
-                            <div class="col-4 col-xl-3 p-1">
-                                <img class="rounded item-hover"
-                                    src="https://i.pinimg.com/564x/b0/42/69/b042691f31cb6e56c8e73662a83490d6.jpg"
-                                    alt="https://i.pinimg.com/564x/b0/42/69/b042691f31cb6e56c8e73662a83490d6.jpg"
-                                    width="100%">
-                            </div>
-                            <% } %>
+                    <div class="row p-3" id="portfolio_body">
+                        <div class="d-flex flex-row justify-content-center m-2" id="loadingId">
+                            <span class="fa fa-spinner fa-spin fa-3x"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 col-xl-4"></div>
+                <div class="col-12 col-xl-4">
+                    <div>
+                        <h3 class="kanit text-light">บทความการศึกษา</h3>
+                    </div>
+                    <div>
+                        <div>
+                            <h5>ทดสอบบทความ</h5>
+                            <p class="sarabun">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi quo excepturi obcaecati ipsam animi dolores dolorum doloribus a possimus voluptas.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script>
+            $(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/portfolio/read2"
+                }).done(function (data) {
+                    console.log(data);
+                    let html = '';
+                    data.forEach(element => {
+                        html += `
+                            <div class="col-4 col-xl-3 p-1 rounded item-hover">
+                                
+                                <img class="item-image rounded" src="${element.p_detail[0].image_address}" width="100%">
+                                <div class="item-text">
+                                    <a href="/" class="p-0">
+                                    <div class="d-flex flex-row justify-content-center bg-gradient-color-o text-light">เข้าชม</div>
+                                    </a>
+                                    <div class="d-flex flex-row">
+                                        <div class="col-4 p-1"><img class="item-image" src="${element.p_detail[0].image_address}" width="100%"></div>
+                                        <div class="col-4 p-1"><img class="item-image" src="${element.p_detail[1].image_address}" width="100%"></div>
+                                        <div class="col-4 p-1"><img class="item-image" src="${element.p_detail[2].image_address}" width="100%"></div>
+                                    </div>
+                                    <div class="item-name p-2 text-light">
+                                        ${element.p_title}
+                                        ${element.p_name}
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            `
+                    });
+                    setTimeout(() => {
+                        $('#portfolio_body').html(html);
+                    }, 500)
+                }).fail(function () {
+                    Swal.fire({
+                        text: 'ไม่สามารถเรียกดูข้อมูลได้',
+                        icon: 'error',
+                        confirmButtonText: 'ตกลง',
+                    }).then(function () {
+                        location.assign('../dashboard')
+                    })
+                })
+
+            })
+        </script>
         <%- include('../includes/footer.ejs') %>
-        <%- include('../layouts/footer.ejs') %>
+            <%- include('../layouts/footer.ejs') %>

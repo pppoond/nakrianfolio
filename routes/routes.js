@@ -4,6 +4,7 @@ var controllers = require('../controllers');
 
 var userRoute = require('./userRoute');
 var portfolioDetailRoute = require('./portfolioDetailRoute');
+var portfolioRoute = require('./portfolioRoute');
 
 //home page routes
 routes.get('/', controllers.homeController.index);
@@ -13,5 +14,10 @@ routes.use('/user', userRoute);
 
 //portfolio detail routes
 routes.use('/portfolio_detail', portfolioDetailRoute);
+
+//portfolio routes
+routes.use('/portfolio', portfolioRoute);
+
+
 
 module.exports = routes;

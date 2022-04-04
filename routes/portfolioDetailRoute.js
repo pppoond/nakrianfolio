@@ -4,8 +4,7 @@ var controllers = require('../controllers');
 
 routes.get('/', controllers.portfolioDetailController.index);
 
-routes.get('/add', function (req, res) {
-    res.send('adddddd userrrr');
-});
+//api
+// routes.get('/read', controllers.portfolioDetailController.read);
 
 module.exports = routes

@@ -1,3 +1,6 @@
+const url = require('url');
+const axios = require('axios');
+
 let homeController = function () { }
 
 homeController.index = function (req, res) {
