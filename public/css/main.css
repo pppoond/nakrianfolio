@@ -21,7 +21,7 @@ a {
 }
 
 .body-bg-gradient-color {
-    background: linear-gradient(90deg, rgb(41, 29, 57) 0%, rgb(23, 59, 55) 52%);
+    background: linear-gradient(90deg, #05445E 0%, #126d7f 52%);
 }
 
 .gradient-color {
