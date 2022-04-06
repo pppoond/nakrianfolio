@@ -1,0 +1,77 @@
+<%- include('../layouts/header.ejs') %>
+    <%- include('../includes/navbar.ejs') %>
+        <div style="height: 55px;"></div>
+        <%- include('../includes/header.ejs') %>
+            <div class="container bg-footer pt-2">
+                <div class="row">
+                    <div class="col-12 col-xl-8">
+                        <div>
+                            <h3 class="kanit text-light">
+                                <%= data.p_title + " " + data.p_name %>
+                            </h3>
+                        </div>
+                        <div class="" id="portfolio_body">
+                            <div class="d-flex flex-column" id="loadingId">
+                                <% data.p_detail.forEach(element=> { %>
+                                    <div class="col-12 rounded mb-3 p-2 bg-footer shadow">
+                                        <div class="row">
+                                            <div class="col-12 col-xl-6">
+                                                <img class="rounded" src="<%= element.image_address %>" width="100%">
+                                            </div>
+                                            <div class="col-12 col-xl-6">
+                                                <div class="d-flex align-items-center pt-2">
+                                                    <img class="rounded-circle" src="/images/logo.png" width="50px">
+                                                    <div class="p-2">
+                                                        <h5>Admin Sompond</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="sarabun pt-2">
+                                                    <%= element.pd_detail %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                                    <div class="col-12 rounded mb-3 p-2 bg-footer shadow">
+                                        <div class="row">
+                                            <div class="sarabun">หากชอบ ฝากกดไลก์ให้หน่อยน้าาาา ><</div>
+                                            <div class="d-flex flex-column justify-content-between">
+                                                <div></div>
+                                                <div class="d-flex align-items-center">
+                                                    <a>
+                                                        <i onclick="onLike(this)"
+                                                            class="fa-solid fa-heart fa-2x animate__animated"></i>
+                                                    </a>
+                                                    <div class="m-2">ถูกใจ 31 ครั้ง</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                    <%- include('../includes/blogs.ejs') %>
+                </div>
+            </div>
+            <script src="https://code.jquery.com/jquery-3.6.0.js"
+                integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+            <script>
+                $(function () {
+
+                    $('.carousel').carousel()
+
+                })
+
+                function onLike(element) {
+                    console.log('Like')
+                    element.classList.remove("animate__heartBeat");
+                    element.style.color = 'red';
+                    setTimeout(() => {
+                        element.classList.add("animate__heartBeat");
+                        element.setAttribute("disabled", true);
+                    }, 50)
+                }
+            </script>
+            <%- include('../includes/footer.ejs') %>
+                <%- include('../layouts/footer.ejs') %>

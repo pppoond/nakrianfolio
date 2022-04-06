@@ -3,7 +3,7 @@ let portfolioDetailModel = require('../models/portfolioDetailModel')
 let portfolioModel = {}
 
 portfolioModel.findAll = function (result) {
-    let sql = "SELECT * FROM portfolio";
+    let sql = "SELECT * FROM portfolio ORDER BY ASC";
     db.query(sql, function (err, res) {
         if (err) {
             return result(err, null);
@@ -82,7 +82,7 @@ portfolioModel.findAll = function (result) {
 
 portfolioModel.testPromiss = function () {
     return new Promise(function (resolve, reject) {
-        db.query("SELECT * FROM portfolio", function (err, res) {
+        db.query("SELECT * FROM portfolio ORDER BY p_id DESC", function (err, res) {
             if (err) {
                 reject(err);
             } else {
@@ -92,17 +92,17 @@ portfolioModel.testPromiss = function () {
     })
 }
 
-portfolioModel.findById = function (id, result) {
-    let sql = "SELECT * FROM portfolio WHERE p_id = " + id;
-    db.query(sql, function (err, res) {
-        if (err) {
-            return result(err, null);
-        } else {
-            return result(null, res);
-        }
-    });
+portfolioModel.findById = function (id) {
+    return new Promise(function (resolve, reject) {
+        db.query("SELECT * FROM portfolio WHERE p_id = ?", [id], function (err, res) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(res);
+            }
+        })
+    })
 }
-
 
 portfolioModel.add = function () {
 
