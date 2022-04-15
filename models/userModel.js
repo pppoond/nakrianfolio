@@ -2,14 +2,15 @@ let db = require('../db');
 let userModel = {}
 
 userModel.findAll = function (result) {
-    let sql = "SELECT * FROM user";
-    db.query(sql, function (err, res) {
-        if (err) {
-            return result(err, null);
-        } else {
-            return result(null, res);
-        }
-    });
+    return new Promise(function (resolve, reject) {
+        db.query("SELECT * FROM user ORDER BY user_id DESC", function (err, res, fields) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(res);
+            }
+        })
+    })
 }
 
 userModel.login = function (username, password) {

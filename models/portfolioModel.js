@@ -82,7 +82,7 @@ portfolioModel.findAll = function (result) {
 
 portfolioModel.testPromiss = function () {
     return new Promise(function (resolve, reject) {
-        db.query("SELECT * FROM portfolio ORDER BY p_id DESC", function (err, res) {
+        db.query("SELECT * FROM portfolio WHERE p_status = '1' ORDER BY p_id DESC", function (err, res) {
             if (err) {
                 reject(err);
             } else {
@@ -104,8 +104,16 @@ portfolioModel.findById = function (id) {
     })
 }
 
-portfolioModel.add = function () {
-
+portfolioModel.add = function (userId, pTitle, pName) {
+    return new Promise((resolve, reject) => {
+        db.query("INSERT INTO portfolio (user_id,p_title,p_name) VALUES(?,?,?)", [userId, pTitle, pName], function (err, res) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(res);
+            }
+        })
+    });
 }
 
 const dbcall = (query, callback) => {

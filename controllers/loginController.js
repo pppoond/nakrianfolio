@@ -1,3 +1,4 @@
+const session = require('express-session');
 const url = require('url');
 let userModel = require('../models/userModel');
 let loginController = function () { }
@@ -11,9 +12,11 @@ loginController.auth = async function (req, res, next) {
     var password = req.body.password;
     var results = await userModel.login(username, password);
     if (results.length >= 1) {
+        req.session.userId = results[0].user_id;
         res.status(200).json({
             title: 'login',
             msg: 'success',
+            response: results[0]
         });
     } else {
         res.status(200).json({

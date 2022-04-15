@@ -1,12 +1,14 @@
 var express = require('express');
 var routes = express.Router();
+var userController = require('../controllers/userController');
 
-routes.get('/', function (req, res) {
-    res.send('userrrr');
-});
+// routes.get('/', userController.index);
+// routes.get('/portfolio/add', userController.add);
 
-routes.get('/add', function (req, res) {
-    res.send('adddddd userrrr');
-});
+//service
+// routes.get('/service/ep/:pId', userController.findByPId);
+
+//api
+// routes.get('/read', userController.read);
 
 module.exports = routes

@@ -1,8 +1,8 @@
 const express = require('express');
 // const expressValidator = require('express-validator');
 // const bodyParser = require('body-parser');
-// const cookieParser = require('cookie-parser');
-// const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 // const flash = require('express-flash');
 // const cors = require('cors');
 const app = express();
@@ -28,12 +28,13 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(__dirname + '/public'));
 // app.use(expressValidator());
-// app.use(session({
-//     secret: 'keyboard cat',
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: { maxAge: 60000 }
-// }));
+app.use(session({
+    secret: 'secretnakrianfolio',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: ((1000 * 60) * 60) * 24 }
+}));
+app.use(cookieParser());
 // app.use(methodOverride(function (req, res) {
 //     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
 //         // look in urlencoded POST bodies and delete it

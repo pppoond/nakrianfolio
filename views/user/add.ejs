@@ -1,0 +1,82 @@
+<%- include('../layouts/header.ejs') %>
+    <%- include('../includes/navbar.ejs') %>
+        <div style="height: 55px;"></div>
+        <div class="container bg-footer pt-2">
+            <div class="row">
+                <div class="col-12 col-xl-4">
+                    <div>
+                        <h3 class="kanit text-light">เมนู</h3>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-row align-items-center p-2">
+                            <i class="fa fa-solid fa-user fa-2x"></i>
+                            Account
+                        </div>
+                        <div class="d-flex flex-row align-items-center p-2">
+                            <i class="fa fa-solid fa-square-rss fa-2x"></i>
+                            <div class="px-2">Feeds</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-8">
+                    <div>
+                        <h3 class="kanit text-light">
+                            เพิ่มแฟ้มสะสมผลงาน
+                        </h3>
+                    </div>
+                    <div class="" id="portfolio_body">
+                        <div class="row">
+                            <div class="col-12 col-xl-6 mb-2 sarabun">
+                                <label for="p_title">หัวเรื่อง</label>
+                                <input type="text" class="form-control" id="pTitle" name="pTitle"
+                                    placeholder="หัวเรื่อง" />
+                            </div>
+                            <div class="col-12 col-xl-6 mb-2 sarabun">
+                                <label for="p_title">ชื่อแฟ้มสะสมผลงาน</label>
+                                <input type="text" class="form-control" id="pName" name="pName"
+                                    placeholder="ชื่อแฟ้มสะสมผลงาน" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-xl-6 mb-2">
+                            <button class="btn btn-success">เพิ่ม</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script>
+            $(function () {
+                $('#btnAddPost').on('click', function () {
+                    $.ajax({
+                        type: 'POST',
+                        contentType: 'application/json', // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                        processData: false,
+                        url: '/login/auth',
+                        data: JSON.stringify({
+                            'pTitle': $('#pTitle').val(),
+                            'pName': $('#pName').val()
+                        }),
+                        dataType: "json"
+                    }).done(function (data) {
+                    }).fail(function (xhr, textStatus, errorThrown) {
+                        console.log(xhr.responseText);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'ไม่สามารถเพิ่มโพสต์ได้',
+                            text: xhr.responseText,
+                            showConfirmButton: true,
+                            confirmButtonText: 'ตกลง',
+                        }).then((result) => {
+                            $('#loginBtn').html('เข้าสู่ระบบ')
+                            $('#loginBtn').attr('disabled', false)
+                        }).catch((err) => {
+
+                        });
+                    });
+                })
+            })
+        </script>
+        <%- include('../includes/footer.ejs') %>
+            <%- include('../layouts/footer.ejs') %>
